@@ -1,9 +1,10 @@
 #include <stdio.h>
 int s[20],x[20],n,d;
+int i;
 void subset(int sum,int k,int rem){
     x[k]=1;
     if(sum+s[k]==d){
-        for(int i=1;i<=k;i++)
+        for(i=1;i<=k;i++)
             if(x[i]) printf("%d ",s[i]);
         printf("\n");
     }
@@ -15,10 +16,11 @@ void subset(int sum,int k,int rem){
     }}
 int main(){
     int sum=0;
+    int i;
     printf("Enter n: ");
     scanf("%d",&n);
     printf("Enter set (sorted): ");
-    for(int i=1;i<=n;i++){
+    for(i=1;i<=n;i++){
         scanf("%d",&s[i]);
         sum+=s[i];
     }
