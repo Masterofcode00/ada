@@ -3,9 +3,9 @@ void dijkstra(int c[10][10],int n,int s,int d[10]){
     int v[10]={0},i,j,u,min;
     for(i=1;i<=n;i++) d[i]=s[c][i];
     v[s]=1;
-    for(i=1;i<n;i++){
+    for(i=1;i<=n;i++){
         min=999;
-        for(j=1;j<n;j++)
+        for(j=1;j<=n;j++)
             if(!v[j]&&d[j]<min)
              min=d[u=j];
         v[u]=1;
