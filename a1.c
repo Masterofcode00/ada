@@ -1,48 +1,37 @@
-# include <stdio.h>
-int p[100], c[100][100], t[100][2];
-int find(int v){
-    while (p[v])
-        v = p[v];
-    return v;
-}
-void union1(int i, int j){ 
-	p[j] = i;
-}
-void kruskal(int n){
-    int i, j, k, u, v, min, res1, res2, sum = 0;
-    for (k = 1; k < n; k++){
-        min = 999;
-        for (i = 1; i < n - 1; i++){
-            for (j = 1; j <= n; j++){
-                if (i == j) continue;
-                if (c[i][j] < min){
-                    u = find(i);
-                    v = find(j);
-                    if (u != v){
-                        res1 = i;
-                        res2 = j;
-                        min = c[i][j];
-                    }}}}
-        union1(res1, find(res2));
-        t[k][1] = res1;
-        t[k][2] = res2;
-        sum = sum + min;
-    }
-    printf("\nCost of spanning tree is=%d", sum);
-    printf("\nEdgesof spanning tree are:\n");
-    for (i = 1; i < n; i++)
-        printf("%d -> %d\n", t[i][1], t[i][2]);
+#include<stdio.h>
+int c[10][10],p[10];
+int find(int x){
+    while(p[x]) x=p[x];
+    return x;
 }
 int main(){
-    int i, j, n;
-    printf("\nEnter the n value:");
-    scanf("%d", & n);
-    for (i = 1; i <= n; i++)
-        p[i] = 0;
-    printf("\nEnter the graph data:\n");
-    for (i = 1; i <= n; i++)
-        for (j = 1; j <= n; j++)
-            scanf("%d", & c[i][j]);
-    kruskal(n);
+    int n,i,j,k=1,u,v,min,a,b,cost=0;
+    printf("Enter the n value:");
+    scanf("%d",&n);
+    printf("Enter the cost matrix:\n");
+    for(i=1;i<=n;i++)
+        for(j=1;j<=n;j++)
+            scanf("%d",&c[i][j]);
+    printf("Edge in MST:\n");
+    while(k<n){
+        min=999;
+        for(i=1;i<=n;i++)
+            for(j=1;j<=n;j++)
+                if(c[i][j]<min){
+                    min=c[i][j];
+                    a=u=i;
+                    b=v=j;
+                }
+                u=find(u);
+                v=find(v);
+                if(u!=v){
+                    p[v]=u;
+                    printf("%d -> %d\n",a,b);
+                    cost+=min;
+                    k++;
+                }
+                c[a][b]=c[b][a]=999;
+    }
+    printf("Minimum cost=%d",cost);
     return 0;
 }
